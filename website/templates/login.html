@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/styles.css'%}">
+</head>
+<body>
+
+<!-- Button to open the modal -->
+<!-- <a href="#" class="open-modal-btn" onclick="openModal()">Open Login Form</a> -->
+
+<!-- The Modal -->
+{% block content %}  {% endblock %}
+<div id="loginModal" class="modal">
+    {% if loginform.errors %}
+    {% for field in loginform %}
+    {% for error in field.errors %}
+        {{error }}
+    {% endfor %}
+    {% endfor %}
+
+    {% endif %}
+    <h2>Login Form</h2>
+    <form action="{% url 'login' %}" method="post" autocomplete="off">
+        {% csrf_token %}
+
+        {{loginform.as_p}}
+
+        <!-- <input type="text" placeholder="Username" required name="username"> -->
+        <!-- <input type="username" placeholder="Username" required name="{{loginform.username}}">
+        <input type="password" placeholder="Password" required name="{{loginform.password}}"> -->
+        <button type="submit" class="submit-btn">Login</button>
+        <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+    </form>
+    <div class="container">
+        <a href="{% url 'reset_password' %}">Reset Password</a>
+    </div>
+</div>
+
+
+
+<script src="{% static 'js/login.js' %}">
+
+</script>
+
+     
+       
+</body>
+</html>

@@ -1,0 +1,7 @@
+django
+uvicorn
+psycopg2-binary
+whitenoise
+environ
+tzdata
+django-cors-headers

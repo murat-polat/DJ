@@ -1,0 +1,42 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+{% block content %}
+<div id="registerModal" class="modal">
+    <h2>Register Form</h2>
+    {% if registerform.errors %}
+    {% for field in registerform %}
+    {% for error in field.errors %}
+        {{error }}
+    {% endfor %}
+    {% endfor %}
+
+    {% endif %}
+    <form action="{% url 'register' %}" method="post" autocomplete="off">
+        {% csrf_token %}
+        <input type="text" placeholder="Username" required name= "username" >
+        <input type="email" placeholder="Email" required  name= "email" >
+        <input type="password" placeholder="Password" required name= "password1" >
+        <input type="password" placeholder="Re enter your password" required name= "password2" >
+        <button type="submit" class="submit-btn">Register</button>
+        <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+ 
+    
+    </form>
+</div>
+
+<script src="{% static 'js/register.js' %}">
+
+</script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% block content %}
+{% if request.user.is_authenticated %}
+
+<div>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">
+            
+        </button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
