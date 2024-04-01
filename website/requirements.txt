@@ -5,3 +5,4 @@ whitenoise
 environ
 tzdata
 django-cors-headers
+django-allauth
