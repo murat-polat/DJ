@@ -182,5 +182,18 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': '456',
             'key': ''
         }
+    },
+    "openid_connect": {
+        "APPS": [
+            {
+                "provider_id": "keycloak",
+                "name": "Keycloak",
+                "client_id": "django2",
+                "secret": "WDj6TSXTlnBHz1baXrORcVDHefvu395S",
+                "settings": {
+                    "server_url": "http://revelmyra.net/realms/master/.well-known/openid-configuration",
+                },
+            }
+        ]
     }
 }
