@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.zoom',
     'allauth.socialaccount.providers.okta',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
+SITE_ID = 1
 ROOT_URLCONF = 'website.urls'
 
 TEMPLATES = [
@@ -176,22 +178,15 @@ AUTHENTICATION_BACKENDS = [
 
 
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'APP': {
-            'client_id': '123',
-            'secret': '456',
-            'key': ''
-        }
-    },
     "openid_connect": {
         "APPS": [
             {
                 "provider_id": "keycloak",
                 "name": "Keycloak",
-                "client_id": "django2",
-                "secret": "WDj6TSXTlnBHz1baXrORcVDHefvu395S",
+                "client_id": "newdj",
+                "secret": "C1XYKsulKJzIN3D1LAIqvKeQ9Rt7NIbU",
                 "settings": {
-                    "server_url": "http://revelmyra.net/realms/master/.well-known/openid-configuration",
+                    "server_url": "https://revelmyra.net/realms/newdj/.well-known/openid-configuration",
                 },
             }
         ]
