@@ -45,8 +45,11 @@
 
 
       <a href="{% provider_login_url provider process=login auth_params=auth_params  %}">{{provider.name}} </a>
+      
    
     {% endfor %}
+    <p>Or</p>
+  <a href="{% provider_login_url 'google' %}">Sign up with Google</a>
 
     <!-- {% load allauth socialaccount %}
     {% get_providers as socialaccount_providers %}

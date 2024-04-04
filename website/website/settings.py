@@ -146,7 +146,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # uvicorn website.asgi:application --host 0.0.0.0:8005 --reload
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'dashboard'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = "0.0.0.0"
@@ -184,11 +184,28 @@ SOCIALACCOUNT_PROVIDERS = {
                 "provider_id": "keycloak",
                 "name": "Keycloak",
                 "client_id": "newdj",
-                "secret": "C1XYKsulKJzIN3D1LAIqvKeQ9Rt7NIbU",
+                "secret": "",
                 "settings": {
                     "server_url": "https://revelmyra.net/realms/newdj/.well-known/openid-configuration",
                 },
+
             }
         ]
+        
+    },
+    'google': {
+        'APP': {
+            'client_id': '',
+            'secret': '',
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
     }
 }
+ 
