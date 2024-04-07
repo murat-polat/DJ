@@ -44,7 +44,7 @@
     
 
 
-      <a href="{% provider_login_url provider process=login auth_params=auth_params  %}">{{provider.name}} </a>
+      <a href="{% provider_login_url provider='keycloak' process=login auth_params=auth_params  %}">{{provider.name}} </a>
       
    
     {% endfor %}

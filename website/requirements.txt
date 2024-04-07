@@ -5,4 +5,7 @@ whitenoise
 environ
 tzdata
 django-cors-headers
+## sudo apt-get install pkg-config libxml2-dev libxmlsec1-dev libxmlsec1-openssl ##
+xmlsec
 django-allauth
+django-allauth[saml]

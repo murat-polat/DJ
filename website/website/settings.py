@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.zoom',
     'allauth.socialaccount.providers.okta',
+    'allauth.socialaccount.providers.saml',
     'django.contrib.sites',
+    'allauth.socialaccount.providers.dataporten',
 ]
 
 MIDDLEWARE = [
@@ -183,10 +185,10 @@ SOCIALACCOUNT_PROVIDERS = {
             {
                 "provider_id": "keycloak",
                 "name": "Keycloak",
-                "client_id": "newdj",
+                "client_id": "",
                 "secret": "",
                 "settings": {
-                    "server_url": "https://revelmyra.net/realms/newdj/.well-known/openid-configuration",
+                    "server_url": "https://domain.net/realms/newdj/.well-known/openid-configuration",
                 },
 
             }
@@ -206,6 +208,60 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type': 'online',
         }
-    }
+    },
+        "saml": {
+        # Here, each app represents the SAML provider configuration of one
+        # organization.
+        "APP": 
+            {
+                # Used for display purposes, e.g. over by: {% get_providers %}
+                "name": "Acme Inc",
+
+                # Accounts signed up via this provider will have their
+                # `SocialAccount.provider` value set to this ID. The combination
+                # of this value and the `uid` must be unique. The IdP entity ID is a
+                # good choice for this.
+                "provider_id": "urn:dev-123.us.auth0.com",
+
+                # The organization slug is configured by setting the
+                # `client_id` value. In this example, the SAML login URL is:
+                #
+                #     /accounts/saml/acme-inc/login/
+                "client_id": "acme-inc",
+
+                # The fields above are common `SocialApp` fields. For SAML,
+                # additional configuration is needed, which is placed in
+                # `SocialApp.settings`:
+                "settings": {
+                    # Mapping account attributes to upstream (IdP specific) attributes.
+                    # If left empty, an attempt will be done to map the attributes using
+                    # built-in defaults.
+                    "attribute_mapping": {
+                        "uid": "http://schemas.auth0.com/clientID",
+                        "email_verified": "http://schemas.auth0.com/email_verified",
+                        "email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress",
+                    },
+                    # The configuration of the IdP.
+                    "idp": {
+                        # The entity ID of the IdP is required.
+                        "entity_id": "urn:dev-123.us.auth0.com",
+
+                        # Then, you can either specify the IdP's metadata URL:
+                        "metadata_url": "https://dev-123.us.auth0.com/samlp/metadata/456",
+
+                        # Or, you can inline the IdP parameters here as follows:
+                        "sso_url": "https://dev-123.us.auth0.com/samlp/456",
+                        "slo_url": "https://dev-123.us.auth0.com/samlp/456",
+                        "x509cert": """
+-----BEGIN CERTIFICATE-----
+MIIDHTCCAgWgAwIBAgIJLogff5x+S0BlMA0GCSqGSIb3DQEBCwUAMCwxKjAoBgNV
+BAMTIWRldi1uYXAybWY1ZTFwMXR3Z2Rv................................
+................................G7qmyqcXRaf9HAuL/MvWz6zd96Ay6WHM
+pXk92/DyUV48JxK/Bl7Bj8qjl5w5R7Dwps6wj+69PIAg
+-----END CERTIFICATE-----
+""",
+                    },
+                }
+            }}
 }
  
